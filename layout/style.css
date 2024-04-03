@@ -1,0 +1,38 @@
+* {
+    font-family: poppins;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    /* margin-bottom: 20px; */
+}
+
+h3 {
+    margin: 0; /* Menghapus margin default */
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 10px;
+    width: 40%;
+    height: 200px;
+    cursor: pointer;
+    box-shadow: rgb(56, 55, 55) 0 4px 8px 4px;
+}
+
+.card:hover {
+    scale: 1.040;
+    transition: all .2s ease-in-out;
+}
