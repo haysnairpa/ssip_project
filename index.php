@@ -67,7 +67,15 @@ if (isset($_POST["customerBtn"])) {
                 </tr>
                 <tr>
                     <td></td>
-                    <td><input type="submit" name="customerBtn" value="Enter"></td?>
+                    <td><input type="submit" name="customerBtn" value="Enter" onclick="custName(`<?= $customer_name ?>`)"></td?>
                 </tr>
+
+        <script>
+            function custName(customer) {
+                const param = `?customer_name=${customer_name}`
+
+                window.location.replace(param)
+            }
+        </script>
 </body>
 </html>
