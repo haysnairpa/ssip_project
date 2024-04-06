@@ -54,7 +54,7 @@ $result2 = mysqli_query($db, "SELECT * FROM stock");
                         <td><?= $stock["quantity"] ?></td>
                         <td>
                             <a href='edit.php?dish_id=$id' style='margin-right: 5px;'>Edit</a>
-                            <a href='delete.php?dish_id=$id'>Delete</a>
+                            <a href="delete.php?dish_id=<?= $id ?>">Delete</a>
                         </td>
                     </tr>
                 <?php endwhile; ?>
