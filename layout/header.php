@@ -13,22 +13,22 @@
         if (basename($_SERVER["SCRIPT_FILENAME"]) === "dashboard.php") : ?>
             <header style="display: flex; justify-content: space-between;">
                 <h3 style="margin: 0;">
-                    <a href="/../../ssip_project/admin/logout.php" style="text-decoration: none; color: black;">Logout</a>
+                    <a href="/../../revoprojek/admin/logout.php" style="text-decoration: none; color: black;">Logout</a><!--diubah dulu itu pathnya-->
                 </h3>
             </header>
         <?php else : ?>
             <header style="display: flex; justify-content: space-between;">
                 <h3 style="margin: 0;">
-                    <a href="/../ssip_project/index.php" style="text-decoration: none; color: black;">RAB Resto</a>
+                    <a href="/../revoprojek/index.php" style="text-decoration: none; color: black;">RAB Resto</a>
                 </h3>
                 <h3 style="margin: 0;">
-                    <a href="/../../ssip_project/admin/logout.php" style="text-decoration: none; color: black;">Logout</a>
+                    <a href="/../../revoprojek/admin/logout.php" style="text-decoration: none; color: black;">Logout</a>
                 </h3>
             </header>
         <?php endif; ?>
     <?php else : ?>
         <h3 style="margin: 0;">
-            <a href="/../ssip_project/index.php" style="text-decoration: none; color: black;">RAB Resto</a>
+            <a href="/../revoprojek/index.php" style="text-decoration: none; color: black;">RAB Resto</a>
         </h3>
     <?php endif; ?>
 </body>

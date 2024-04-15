@@ -47,7 +47,7 @@ if (isset($_POST["updateBtn"])) {
         <table>
             <tr>
                 <td>Menu Name : </td>
-                <td><input type="text" name="dish_name" value=" <?= $dish_name ?> "></td>
+                <td><input type="text" name="dish_name" value=" <?php echo $dish_name ?> "></td>
             </tr>
             <tr>
                 <td>Price : </td>
