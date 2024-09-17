@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="app.css">
+  <script src="app.js"></script>
+  <title>Items App</title>
+</head>
+
+<body>
+
+  <h1>Items App</h1>
+
+  <br>
+
+  <div>
+    <label for="name" class="labels">Name: </label>
+    <input type="text" id="name" class="textinput" placeholder="Enter name (required)">
+    <span style="margin-left: 20px;"></span>
+    <label for="quantity" class="labels">Quantity: </label>
+    <input type="number" id="quantity" class="textinput" placeholder="Enter quantity (required)">
+  </div>
+
+  <br>
+
+  <div id="table-wrapper">
+    <table id="data-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th class="t-qty">Quantity</th>
+          <th class="t-radio">Select</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <br><br>
+
+  <div>
+    <button type="button" class="buttons" onclick="addData()" title="Add new row from the text inputs">Add</button>
+    <button type="button" class="buttons" onclick="updateData()" title="Update selected row">Update</button>
+    <button type="button" class="buttons" onclick="deleteData()" title="Delete selected row">Delete</button>
+    <span style="margin-left: 10px;"></span>
+    <button type="button" class="buttons" onclick="clearData()" title="Clear selection">Clear</button>
+    <button type="button" class="buttons" onclick="selectFirstOrLastRow(1)" title="Select first row of table">First</button>
+    <button type="button" class="buttons" onclick="selectFirstOrLastRow()" title="Select last row of table">Last</button>
+  </div>
+  
+  <br><br>
+
+  <div id="status-wrapper">
+    <span class="labels">Status: </span>
+    <span id="status"></span>
+  </div>
+
+</body>
+</html>
