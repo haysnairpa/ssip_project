@@ -8,7 +8,6 @@ if (!isset($_SESSION['user_id'])) {
 
 require_once 'config.php';
 
-// Ambil data menu dari database dan kelompokkan berdasarkan kategori
 $stmt = $pdo->query("SELECT * FROM menu ORDER BY category, name");
 $menu_items = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $menu_by_category = [];
