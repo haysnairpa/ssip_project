@@ -11,7 +11,7 @@
     <footer class="footer section">
             <div class="footer__container bd-grid">
                 <div class="footer__data">
-                    <h2 class="footer__title">Chef Aldi</h2>
+                    <h2 class="footer__title">Radatouli</h2>
                     <p class="footer__text">FAQ</p>
                 </div>
 
@@ -29,6 +29,10 @@
                     <a href="#" class="footer__social"><i class="bx bxl-facebook"></i></a>
                     <a href="#" class="footer__social"><i class="bx bxl-instagram"></i></a>
                     <a href="#" class="footer__social"><i class="bx bxl-twitter"></i></a>
+                </div>
+
+                <div class="footer__data" style="font-size: 0.8em; opacity: 0.5;">
+                    <a href="admin_login.php" class="footer__link">Admin</a>
                 </div>
             </div>
         </footer>

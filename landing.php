@@ -1,19 +1,17 @@
 <?php
-include "database.php";
 session_start();
+require_once 'config.php';
 
 if (isset($_POST["reserveBtn"])) {
-    if (isset($_SESSION["is_login"]) && $_SESSION["is_login"] == true) {
-        header("location:calender2.php");
+    if (isset($_SESSION["user_id"])) {
+        header("location: calender2.php");
         exit;
     } else {
-        header("location:submit-login.php");
+        header("location: login.php");
         exit;
     }
 }
-
 ?>
-
 
 <!DOCTYPE html>
     <html lang="en">
@@ -27,15 +25,15 @@ if (isset($_POST["reserveBtn"])) {
         <!-- ===== BOX ICONS ===== -->
         <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
 
-        <title>Chef Aldi</title>
+        <title>Radatouli</title>
     </head>
     <body>
-        <?php include 'layout/header.php'; ?>
+        <?php include 'layout/header.php';?>
         <main class="l-main">
         <!--===== home =====-->
         <section class="home" id="home">
             <div class="home__container bd-grid">
-                <h1 class="home__title"><span>Chef Aldi</span></h1>
+                <h1 class="home__title"><span>Radatouli</span></h1>
 
                 <div class="home__scroll">
                     <a href="#reserve" class="home__scroll-link"><i class='bx bx-up-arrow-alt' ></i>Scroll down</a>
