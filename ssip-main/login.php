@@ -29,6 +29,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
+        
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+    </style>
 </head>
 <body class="bg-gray-100">
     <div class="container mx-auto mt-8 max-w-md">

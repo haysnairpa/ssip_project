@@ -25,6 +25,12 @@ foreach ($menu_items as $item) {
     <title>Menu Makanan</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
+        
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        
         .category-title {
             background-color: #4a5568;
             color: white;

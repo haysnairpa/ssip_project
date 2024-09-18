@@ -66,6 +66,14 @@ try {
         ");
     }
 
+    // Buat tabel bookings jika belum ada
+    $pdo->exec("CREATE TABLE IF NOT EXISTS bookings (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        booking_date DATE NOT NULL,
+        booking_time TIME NOT NULL,
+        booking_name VARCHAR(255) NOT NULL
+    )");
+
 } catch (\PDOException $e) {
     throw new \PDOException($e->getMessage(), (int)$e->getCode());
 }
