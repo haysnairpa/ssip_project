@@ -1,11 +1,7 @@
 <?php
-session_start();
+require_once 'auth.php';
+requireAdminLogin();
 require_once 'config.php';
-
-if (!isset($_SESSION['admin_id'])) {
-    header("Location: admin_login.php");
-    exit();
-}
 
 // Ambil data menu
 $stmt = $pdo->query("SELECT id, name, category, price, stock FROM menu ORDER BY category, name");

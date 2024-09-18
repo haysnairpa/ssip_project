@@ -1,4 +1,6 @@
 <?php
+require_once 'auth.php';
+redirectIfUserLoggedIn();
 require_once 'config.php';
 
 $error = '';

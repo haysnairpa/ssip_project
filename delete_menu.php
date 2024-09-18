@@ -1,22 +1,31 @@
 <?php
-session_start();
+require_once 'auth.php';
+requireAdminLogin();
 require_once 'config.php';
 
-if (!isset($_SESSION['admin_id'])) {
-    header("Location: admin_login.php");
-    exit();
-}
-
-if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['id'])) {
+if (isset($_GET['id'])) {
     $id = $_GET['id'];
-    $stmt = $pdo->prepare("DELETE FROM menu WHERE id = ?");
-    if ($stmt->execute([$id])) {
+    
+    try {
+        $pdo->beginTransaction();
+        
+        // Hapus terlebih dahulu item terkait di tabel cart
+        $stmt = $pdo->prepare("DELETE FROM cart WHERE item_id = ?");
+        $stmt->execute([$id]);
+        
+        // Kemudian hapus item dari tabel menu
+        $stmt = $pdo->prepare("DELETE FROM menu WHERE id = ?");
+        $stmt->execute([$id]);
+        
+        $pdo->commit();
         header("Location: admin_dashboard.php?success=1");
-    } else {
+        exit();
+    } catch (PDOException $e) {
+        $pdo->rollBack();
         header("Location: admin_dashboard.php?error=1");
+        exit();
     }
+} else {
+    header("Location: admin_dashboard.php");
     exit();
 }
-
-header("Location: admin_dashboard.php");
-exit();

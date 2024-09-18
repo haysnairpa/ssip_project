@@ -1,11 +1,6 @@
-<?php include 'layout/header.php'; ?>
 <?php
-session_start();
-if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php");
-    exit();
-}
-
+require_once 'auth.php';
+requireUserLogin();
 require_once 'config.php';
 
 $stmt = $pdo->query("SELECT * FROM menu ORDER BY category, name");
@@ -22,14 +17,10 @@ foreach ($menu_items as $item) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu Makanan</title>
+    <link rel="stylesheet" href="landing.css">
+    <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
-        
-        body {
-            font-family: 'Space Grotesk', sans-serif;
-        }
-        
         .category-title {
             background-color: #4a5568;
             color: white;
@@ -41,17 +32,19 @@ foreach ($menu_items as $item) {
     </style>
 </head>
 <body class="bg-gray-100">
-    <div class="container mx-auto mt-8 px-4">
-        <h1 class="text-3xl font-bold mb-6 text-center">Menu Makanan</h1>
+    <?php include 'layout/header.php'; ?>
+    
+    <div class="container mx-auto mt-24 px-4">
+        <h1 class="text-3xl text-black font-bold mb-6 text-center">Menu Makanan</h1>
         <?php foreach ($menu_by_category as $category => $items): ?>
             <h2 class="category-title text-xl font-semibold"><?= htmlspecialchars($category) ?></h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
                 <?php foreach ($items as $item): ?>
                     <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition duration-300">
-                        <h3 class="text-xl font-semibold mb-2"><?= htmlspecialchars($item['name']) ?></h3>
+                        <h3 class="text-xl text-black font-semibold mb-2"><?= htmlspecialchars($item['name']) ?></h3>
                         <p class="text-gray-600 mb-4"><?= htmlspecialchars($item['description']) ?></p>
-                        <p class="text-lg font-bold mb-4">Rp <?= number_format($item['price'], 0, ',', '.') ?></p>
-                        <form action="add_to_cart.php" method="post" class="flex items-center">
+                        <p class="text-lg text-black font-bold mb-4">Rp <?= number_format($item['price'], 0, ',', '.') ?></p>
+                        <form action="add_to_cart.php" method="post" class="flex text-black items-center">
                             <input type="hidden" name="item_id" value="<?= $item['id'] ?>">
                             <input type="hidden" name="name" value="<?= htmlspecialchars($item['name']) ?>">
                             <input type="hidden" name="price" value="<?= $item['price'] ?>">
@@ -63,5 +56,7 @@ foreach ($menu_items as $item) {
             </div>
         <?php endforeach; ?>
     </div>
+
+    <?php include 'layout/footer.php'; ?>
 </body>
 </html>

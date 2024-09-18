@@ -1,5 +1,6 @@
 <?php
-session_start();
+require_once 'auth.php';
+requireUserLogin();
 require_once 'config.php';
 
 if (isset($_POST["reserveBtn"])) {
