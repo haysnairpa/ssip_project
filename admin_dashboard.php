@@ -3,33 +3,56 @@ require_once 'auth.php';
 requireAdminLogin();
 require_once 'config.php';
 
-// Initialize search variables
+// Initialize search and sorting variables
 $search_query = '';
 $search_menu_items = [];
 $search_booking_items = [];
+$menu_sort = 'name';
+$booking_sort = 'booking_date';
 
 // Check if a search query has been submitted
 if (isset($_GET['search'])) {
     $search_query = trim($_GET['search']);
-
-    // Prepare the SQL statement for menu items
-    $stmt = $pdo->prepare("SELECT id, name, category, price, stock FROM menu WHERE name LIKE :search ORDER BY category, name");
-    $stmt->execute([':search' => "%$search_query%"]);
-    $search_menu_items = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-    // Prepare the SQL statement for bookings
-    $stmt2 = $pdo->prepare("SELECT id, booking_date, booking_time, booking_name, num_persons FROM bookings WHERE booking_name LIKE :search ORDER BY booking_date, booking_time");
-    $stmt2->execute([':search' => "%$search_query%"]);
-    $search_booking_items = $stmt2->fetchAll(PDO::FETCH_ASSOC);
-} else {
-    // If no search, get all items
-    $stmt = $pdo->query("SELECT id, name, category, price, stock FROM menu ORDER BY category, name");
-    $search_menu_items = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-    // Fetch all bookings
-    $stmt2 = $pdo->query("SELECT id, booking_date, booking_time, booking_name, num_persons FROM bookings ORDER BY booking_date, booking_time");
-    $search_booking_items = $stmt2->fetchAll(PDO::FETCH_ASSOC);
 }
+
+// Handle sorting for menu items
+if (isset($_GET['menu_sort'])) {
+    $menu_sort = $_GET['menu_sort'];
+}
+
+// Handle sorting for booking items
+if (isset($_GET['booking_sort'])) {
+    $booking_sort = $_GET['booking_sort'];
+}
+
+// Prepare the SQL statement for menu items with sorting
+$menu_sort_query = match ($menu_sort) {
+    'price_high' => 'ORDER BY price DESC',
+    'price_low' => 'ORDER BY price ASC',
+    'category' => 'ORDER BY category, name',
+    'stock_high' => 'ORDER BY stock DESC',
+    'stock_low' => 'ORDER BY stock ASC',
+    'all' => 'ORDER BY id',  // Sort by ID
+    default => 'ORDER BY name',
+};
+
+$stmt = $pdo->prepare("SELECT id, name, category, price, stock FROM menu WHERE name LIKE :search $menu_sort_query");
+$stmt->execute([':search' => "%$search_query%"]);
+$search_menu_items = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+// Prepare the SQL statement for bookings with sorting
+$booking_sort_query = match ($booking_sort) {
+    'time' => 'ORDER BY booking_time, booking_date',
+    'name' => 'ORDER BY booking_name',
+    'num_persons' => 'ORDER BY num_persons',
+    'date' => 'ORDER BY booking_date, booking_time',
+    'all' => 'ORDER BY id',  // Sort by ID
+    default => 'ORDER BY booking_date, booking_time',
+};
+
+$stmt2 = $pdo->prepare("SELECT id, booking_date, booking_time, booking_name, num_persons FROM bookings WHERE booking_name LIKE :search $booking_sort_query");
+$stmt2->execute([':search' => "%$search_query%"]);
+$search_booking_items = $stmt2->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -84,6 +107,17 @@ if (isset($_GET['search'])) {
             </div>
         <?php endif; ?>
 
+        <h2 class="text-xl font-bold mb-4">Menu Items</h2>
+        <div class="mb-4">
+            <span>Sort by:</span>
+            <a href="?search=<?= urlencode($search_query) ?>&menu_sort=all" class="text-blue-500 hover:text-blue-700 mx-2">All</a>
+            <a href="?search=<?= urlencode($search_query) ?>&menu_sort=price_low" class="text-blue-500 hover:text-blue-700 mx-2">Price Low to High</a>
+            <a href="?search=<?= urlencode($search_query) ?>&menu_sort=price_high" class="text-blue-500 hover:text-blue-700 mx-2">Price High to Low</a>
+            <a href="?search=<?= urlencode($search_query) ?>&menu_sort=category" class="text-blue-500 hover:text-blue-700 mx-2">Category</a>
+            <a href="?search=<?= urlencode($search_query) ?>&menu_sort=stock_low" class="text-blue-500 hover:text-blue-700 mx-2">Stock Low to High</a>
+            <a href="?search=<?= urlencode($search_query) ?>&menu_sort=stock_high" class="text-blue-500 hover:text-blue-700 mx-2">Stock High to Low</a>
+        </div>
+
         <table class="w-full bg-white shadow-md rounded mb-6">
             <thead>
                 <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
@@ -109,7 +143,17 @@ if (isset($_GET['search'])) {
                 <?php endforeach; ?>
             </tbody>
         </table>
-        
+
+        <h2 class="text-xl font-bold mb-4">Booking Items</h2>
+        <div class="mb-4">
+            <span>Sort by:</span>
+            <a href="?search=<?= urlencode($search_query) ?>&booking_sort=all" class="text-blue-500 hover:text-blue-700 mx-2">All</a>
+            <a href="?search=<?= urlencode($search_query) ?>&booking_sort=time" class="text-blue-500 hover:text-blue-700 mx-2">Time</a>
+            <a href="?search=<?= urlencode($search_query) ?>&booking_sort=name" class="text-blue-500 hover:text-blue-700 mx-2">Name</a>
+            <a href="?search=<?= urlencode($search_query) ?>&booking_sort=num_persons" class="text-blue-500 hover:text-blue-700 mx-2">Number of Persons</a>
+            <a href="?search=<?= urlencode($search_query) ?>&booking_sort=date" class="text-blue-500 hover:text-blue-700 mx-2">Date</a>
+        </div>
+
         <table class="w-full bg-white shadow-md rounded mb-6">
             <thead>
                 <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
