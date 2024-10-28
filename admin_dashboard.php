@@ -103,7 +103,7 @@ $search_booking_items = $stmt2->fetchAll(PDO::FETCH_ASSOC);
         <?php endif; ?>
         <?php if (isset($_GET['booking_notdeleted'])): ?>
             <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4" role="alert">
-                Terjadi kesalahan saat menghapus menu.  
+                Terjadi kesalahan saat menghapus booking.  
             </div>
         <?php endif; ?>
 
