@@ -127,3 +127,23 @@
    color:#333;
 }
 
+@media screen and (max-width: 768px) {
+  .menu-row {
+    flex-direction: column;
+  }
+  
+  .menu-column, 
+  .menu-column-text {
+    width: 100%;
+    margin: 10px 0;
+  }
+  
+  .menu-column img {
+    width: 100%;
+    height: 200px;
+  }
+  
+  .container {
+    padding: 0 15px;
+  }
+}

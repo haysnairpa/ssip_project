@@ -27,7 +27,7 @@ if (isset($_POST["reserveBtn"])) {
         <!-- ===== BOX ICONS ===== -->
         <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
 
-        <title>Radatouli</title>
+        <title>Uncle’s Warmination</title>
     </head>
     <body>
         <?php include 'layout/header.php'; ?>
@@ -35,7 +35,7 @@ if (isset($_POST["reserveBtn"])) {
         <!--===== home =====-->
         <section class="home" id="home">
             <div class="home__container bd-grid">
-                <h1 class="home__title"><span>Radatouli</span></h1>
+                <h1 class="home__title"><span>Uncle’s Warmination</span></h1>
 
                 <div class="home__scroll">
                     <a href="#reserve" class="home__scroll-link"><i class='bx bx-up-arrow-alt' ></i>Scroll down</a>

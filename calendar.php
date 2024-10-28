@@ -271,7 +271,7 @@
     <header class="l-header">
         <nav class="nav bd-grid">
             <div>
-                <a href="#" class="nav__logo">Radatouli</a>
+                <a href="#" class="nav__logo">Uncle’s Warmination</a>
             </div>
 
             <div class="nav__home" id="nav-home">

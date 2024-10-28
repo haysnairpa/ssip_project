@@ -57,7 +57,7 @@ if (isset($_GET['remove'])) {
     </style>
 </head>
 <body class="bg-gray-100">
-    <div class="container mx-auto mt-8 px-4">
+    <div class="container mx-auto mt-24 px-4">
         <h1 class="text-3xl font-bold mb-6 text-center">Keranjang Belanja</h1>
         <?php if (count($cart_items) > 0): ?>
             <table class="w-full bg-white shadow-md rounded">
